@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "async.map": "^0.5.2",
+    "dotenv-safe": "^4.0.3",
+    "express": "^4.14.0",
+    "react-responsive-audio-player": "^1.1.2",
+    "string.prototype.endswith": "^0.2.0"
+  }
+}
