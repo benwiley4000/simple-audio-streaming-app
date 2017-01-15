@@ -1,19 +1,10 @@
-require('dotenv-safe').load();
-
 require('string.prototype.endswith');
 var fs = require('fs');
 var path = require('path');
 var express = require('express');
 var asyncMap = require('async.map');
 
-var audioDirectories =
-    process.env.AUDIO_DIRECTORY
-        .split(',')
-        .map(function (dir) {
-            return dir.trim();
-        });
-
-var html = fs.readFileSync('index.html').toString();
+var html = fs.readFileSync(path.join(__dirname, 'index.html')).toString();
 
 // http://stackoverflow.com/a/36221905
 function resolveHome (filepath) {
@@ -40,7 +31,7 @@ function fetchMp3List (directory, callback) {
     });
 }
 
-function fetchMp3ListsFlattened (callback) {
+function fetchMp3ListsFlattened (audioDirectories, callback) {
     asyncMap(audioDirectories, fetchMp3List, function (err, mp3Lists) {
         if (err) {
             return callback(err);
@@ -55,27 +46,32 @@ function fetchMp3ListsFlattened (callback) {
     });
 }
 
-var app = express();
+module.exports = function server (audioDirectories, port) {
+    var app = express();
 
-app.use(express.static('node_modules/react-responsive-audio-player/dist'));
-audioDirectories.forEach(function (directory) {
-    app.use(express.static(resolveHome(directory)));
-});
-
-app.get('/', function (req, res) {
-    res.header('Content-Type', 'text/html');
-    fetchMp3ListsFlattened(function (err, audioList) {
-        if (err) {
-            console.error(err);
-            return res.status(500).end('500 Server Error');
-        }
-        res.end(html.replace(
-            'var playlist = []',
-            'var playlist = ' + JSON.stringify(audioList)
-        ));
+    app.use(express.static(path.join(
+        process.cwd(),
+        'node_modules/react-responsive-audio-player/dist'
+    )));
+    audioDirectories.forEach(function (directory) {
+        app.use(express.static(resolveHome(directory)));
     });
-});
 
-app.listen(3000, function () {
-    console.log('Your playlist is available at port 3000');
-});
+    app.get('/', function (req, res) {
+        res.header('Content-Type', 'text/html');
+        fetchMp3ListsFlattened(audioDirectories, function (err, audioList) {
+            if (err) {
+                console.error(err);
+                return res.status(500).end('500 Server Error');
+            }
+            res.end(html.replace(
+                'var playlist = []',
+                'var playlist = ' + JSON.stringify(audioList)
+            ));
+        });
+    });
+
+    return app.listen(port || 3000, function () {
+        console.log('Your playlist is available at port 3000');
+    });
+};
