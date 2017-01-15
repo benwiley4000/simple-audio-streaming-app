@@ -8,5 +8,30 @@
   },
   "scripts": {
     "start": "node start.js"
-  }
+  },
+  "name": "simple-audio-streaming-app",
+  "description": "Run this Node app to stream mp3 files from your local machine to a web page on your local network.",
+  "version": "0.1.0",
+  "main": "start.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benwiley4000/simple-audio-streaming-app.git"
+  },
+  "keywords": [
+    "audio",
+    "stream",
+    "streaming",
+    "app",
+    "electron",
+    "server",
+    "music",
+    "react"
+  ],
+  "author": "Ben Wiley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/benwiley4000/simple-audio-streaming-app/issues"
+  },
+  "homepage": "https://github.com/benwiley4000/simple-audio-streaming-app#readme"
 }

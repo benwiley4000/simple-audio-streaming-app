@@ -1,4 +1,4 @@
-# node-audio-streaming-app
+# simple-audio-streaming-app
 
 Run this Node app to stream mp3 files from your local machine to a web page on your local network.
 
