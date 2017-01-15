@@ -2,12 +2,14 @@
   "dependencies": {
     "async.map": "^0.5.2",
     "dotenv-safe": "^4.0.3",
+    "electron": "^1.4.14",
     "express": "^4.14.0",
     "react-responsive-audio-player": "^1.1.2",
     "string.prototype.endswith": "^0.2.0"
   },
   "scripts": {
-    "start": "node start.js"
+    "start": "node start.js",
+    "start:app": "electron app/index.js"
   },
   "name": "simple-audio-streaming-app",
   "description": "Run this Node app to stream mp3 files from your local machine to a web page on your local network.",
