@@ -34,14 +34,23 @@
     <script src="audioplayer.js"></script>
     <script>
       var playlist = [];
+      var audioElement = {};
       ReactDOM.render(
         React.createElement(AudioPlayer, {
           playlist: playlist,
           autoplay: true,
-          style: { position: 'fixed', bottom: 0 }
+          style: { position: 'fixed', bottom: 0 },
+          audioElementRef: function (elem) {
+              audioElement = elem;
+          }
         }),
         document.getElementById('audio_player_container')
       );
+      document.addEventListener('keyup', function (e) {
+        if (e.keyCode === 32) {
+          audioElement[audioElement.paused ? 'play' : 'pause']();
+        }
+      });
     </script>
   </body>
 </html>
