@@ -14,5 +14,5 @@ Your audio directories should be specified in a file called `.env`. They can be 
 See `.env.example` - specify a comma-separated list of directories.
 
 ```
-AUDIO_DIRECTORY=~/Music/MyAudioFiles,/home/User/audio files,/etc/audio_mp3s
+AUDIO_DIRECTORY=~/Music/MyAudioFiles,/home/User/audio files,audio_mp3s
 ```
