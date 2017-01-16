@@ -4,19 +4,28 @@
     "dotenv-safe": "^4.0.3",
     "electron": "^1.4.14",
     "express": "^4.14.0",
+    "object-assign": "^4.1.0",
     "photonkit": "^0.1.2",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
     "react-responsive-audio-player": "^1.1.2",
+    "redux": "^3.6.0",
     "string.prototype.endswith": "^0.2.0"
   },
   "scripts": {
     "start": "node start.js",
-    "start:app": "electron app/index.js"
+    "app:start": "electron app/main.js",
+    "app:build": "babel app/renderer/DirectoryList.jsx --out-file app/renderer/DirectoryList.js",
+    "app:dev": "babel app/renderer/DirectoryList.jsx --watch --out-file app/renderer/DirectoryList.js"
   },
   "name": "simple-audio-streaming-app",
   "description": "Run this Node app to stream mp3 files from your local machine to a web page on your local network.",
   "version": "0.1.0",
   "main": "start.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-react": "^6.16.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/benwiley4000/simple-audio-streaming-app.git"
@@ -29,7 +38,8 @@
     "electron",
     "server",
     "music",
-    "react"
+    "react",
+    "redux"
   ],
   "author": "Ben Wiley",
   "license": "MIT",
