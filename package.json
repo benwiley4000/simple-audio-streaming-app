@@ -4,6 +4,7 @@
     "dotenv-safe": "^4.0.3",
     "electron": "^1.4.14",
     "express": "^4.14.0",
+    "photonkit": "^0.1.2",
     "react-responsive-audio-player": "^1.1.2",
     "string.prototype.endswith": "^0.2.0"
   },
