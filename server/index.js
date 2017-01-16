@@ -53,6 +53,7 @@ module.exports = function server (audioDirectories, port) {
         process.cwd(),
         'node_modules/react-responsive-audio-player/dist'
     )));
+
     audioDirectories.forEach(function (directory) {
         app.use(express.static(resolveHome(directory)));
     });
