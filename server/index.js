@@ -4,15 +4,9 @@ var path = require('path');
 var express = require('express');
 var asyncMap = require('async.map');
 
-var html = fs.readFileSync(path.join(__dirname, 'index.html')).toString();
+var resolveHome = require('./resolveHome');
 
-// http://stackoverflow.com/a/36221905
-function resolveHome (filepath) {
-  if (filepath[0] === '~' && process.env.HOME) {
-    return path.join(process.env.HOME, filepath.slice(1));
-  }
-  return filepath;
-}
+var html = fs.readFileSync(path.join(__dirname, 'index.html')).toString();
 
 function fetchMp3List (directory, callback) {
   fs.readdir(resolveHome(directory), function (err, files) {
