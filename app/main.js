@@ -15,7 +15,10 @@ var server = null;
 store.subscribe(function () {
   var state = store.getState();
   if (state.running && !server) {
-    server = startServer(state.directories, state.port);
+    server = startServer({
+      audioDirectories: state.directories,
+      port: state.port
+    });
   }
   if (!state.running && server) {
     server.close();

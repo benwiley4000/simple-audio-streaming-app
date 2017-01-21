@@ -9,4 +9,6 @@ var audioDirectories =
       return dir.trim();
     });
 
-server(audioDirectories);
+server({
+  audioDirectories: audioDirectories
+});

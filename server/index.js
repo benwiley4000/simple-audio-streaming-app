@@ -46,7 +46,11 @@ function fetchMp3ListsFlattened (audioDirectories, callback) {
   });
 }
 
-module.exports = function server (audioDirectories, port) {
+module.exports = function server (options) {
+  options = options || {};
+  options.audioDirectories = options.audioDirectories;
+  options.port = options.port || 3000;
+
   var app = express();
 
   app.use(express.static(path.join(
@@ -54,13 +58,13 @@ module.exports = function server (audioDirectories, port) {
     'node_modules/react-responsive-audio-player/dist'
   )));
 
-  audioDirectories.forEach(function (directory) {
+  options.audioDirectories.forEach(function (directory) {
     app.use(express.static(resolveHome(directory)));
   });
 
   app.get('/', function (req, res) {
     res.header('Content-Type', 'text/html');
-    fetchMp3ListsFlattened(audioDirectories, function (err, audioList) {
+    fetchMp3ListsFlattened(options.audioDirectories, function (err, audioList) {
       if (err) {
         console.error(err);
         return res.status(500).end('500 Server Error');
@@ -72,7 +76,7 @@ module.exports = function server (audioDirectories, port) {
     });
   });
 
-  return app.listen(port || 3000, function () {
-    console.log('Your playlist is available at port 3000');
+  return app.listen(options.port, function () {
+    console.log('Your playlist is available at port ' + options.port);
   });
 };
